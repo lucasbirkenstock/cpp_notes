@@ -18,6 +18,19 @@ int main()
     Proves that universal references must be of form T&& only. std::vector<T>&& is not form T&&. 
     */
 
+    const int ci = 50;
+    // also_takes_rval_ref_arg(ci); Doesn't work - lvalue
+    also_takes_rval_ref_arg(std::move(ci));
+    // The function not accepting an lvalue proves that the function parameter is an lvalue reference, not a universal reference.
+    // If it were a universal reference, an lvalue would be accepted. 
+    
+    /*
+    Overall takeaways: 
+    Universal references have the form T&& or auto&& only. 
+      - Qualifiers like const are enough to disqualify T&& from being a universal reference. 
 
+    T&& without type deduction = rvalue reference. The type deduction only happens in templates or auto&&. 
+      - Templates do not automatically mean that T&& is being deduced. 
+    */
 }
 
