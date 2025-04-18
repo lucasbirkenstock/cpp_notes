@@ -50,6 +50,7 @@ class Child : Parent
 class Bar
 {
     public:
+    // This is called SFINAE - substitution failure is not an error. Only enables a template if a condition is met. Enables universal references + overloading. 
     template<typename T, typename = std::enable_if_t<!std::is_base_of<Parent, std::decay_t<T>>::value || std::is_same<Parent, std::decay_t<T>>::value >>
     void foobar(T&& arg) const
     {
